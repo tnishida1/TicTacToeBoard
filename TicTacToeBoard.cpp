@@ -19,6 +19,12 @@ TicTacToeBoard::TicTacToeBoard()
 **/
 Piece TicTacToeBoard::toggleTurn()
 {
+  //make sure this occurs after place piece? 
+  if(turn == X)
+    {
+      
+
+    }
   return Invalid;
 }
 
