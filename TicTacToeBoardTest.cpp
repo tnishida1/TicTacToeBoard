@@ -14,9 +14,133 @@ class TicTacToeBoardTest : public ::testing::Test
 		virtual void TearDown(){} //clean up after each test, (before destructor) 
 };
 
-/* EXAMPLE TEST FORMAT
-TEST(TicTacToeBoardTest, sanityCheck)
+//horizontal win
+TEST(TicTacToeBoardTest, verticalWinTest)
 {
-	ASSERT_TRUE(true);
+	TicTacToeBoard TTT;
+	TTT.placePiece(0,1); //x
+	TTT.toggleTurn();
+	TTT.placePiece(1,2); //o
+	TTT.toggleTurn();
+	TTT.placePiece(0,0); //x
+
+	TTT.toggleTurn();
+	TTT.placePiece(1,1); //o
+	TTT.toggleTurn();
+	TTT.placePiece(0,2); //x
+	
+	ASSERT_TRUE(TTT.getWinner()==X);
+
+	ASSERT_TRUE(TTT.getPiece(0,1)==X);
+	ASSERT_TRUE(TTT.getPiece(0,0)==X);
+	ASSERT_TRUE(TTT.getPiece(1,2)==O);
 }
-*/
+
+//vertical win
+TEST(TicTacToeBoardTest, horizontalWinTest)
+{
+	TicTacToeBoard TTT;
+	TTT.placePiece(0,0); //x
+	TTT.toggleTurn();
+	TTT.placePiece(1,1); //o
+	TTT.toggleTurn();
+	TTT.placePiece(1,0); //x
+
+	TTT.toggleTurn();
+	TTT.placePiece(1,2); //o
+	TTT.toggleTurn();
+	TTT.placePiece(2,0); //x
+	
+	ASSERT_TRUE(TTT.getWinner()==X);
+}
+
+//diagonal win and O win test
+TEST(TicTacToeBoardTest, diag1AndOWinTest)
+{
+	TicTacToeBoard TTT;
+	TTT.placePiece(1,0); //x
+	TTT.toggleTurn();
+	TTT.placePiece(0,2); //o
+	TTT.toggleTurn();
+	TTT.placePiece(1,0); //x
+	TTT.toggleTurn();
+	TTT.placePiece(1,1); //o
+	TTT.toggleTurn();
+	TTT.placePiece(1,0); //x
+	TTT.toggleTurn();
+	TTT.placePiece(2,0); //o
+	
+	ASSERT_TRUE(TTT.getWinner()==O);
+}
+
+
+//diagonal win and O win test
+TEST(TicTacToeBoardTest, diag2AndOWinTest)
+{
+	TicTacToeBoard TTT;
+	TTT.placePiece(1,0); //x
+	TTT.toggleTurn();
+	TTT.placePiece(0,0); //o
+	TTT.toggleTurn();
+	TTT.placePiece(1,0); //x
+	TTT.toggleTurn();
+	TTT.placePiece(1,1); //o
+	TTT.toggleTurn();
+	TTT.placePiece(1,0); //x
+	TTT.toggleTurn();
+	TTT.placePiece(2,2); //o
+	
+	ASSERT_TRUE(TTT.getWinner()==O);
+}
+
+
+TEST(TicTacToeBoardTest, getWinnerToggleTest)
+{
+	TicTacToeBoard TTT;
+	TTT.placePiece(0,0); //x
+	TTT.toggleTurn();
+	TTT.placePiece(1,0); //o
+	TTT.toggleTurn();
+	TTT.placePiece(0,1); //o
+	TTT.toggleTurn();
+	TTT.placePiece(1,1); //x
+	TTT.toggleTurn();
+	TTT.placePiece(0,2); //x
+	TTT.toggleTurn();
+	ASSERT_TRUE(TTT.toggleTurn()=='X');
+}
+
+//return X in tie
+TEST(TicTacToeBoardTest, tieTestWorking)
+{
+	TicTacToeBoard TTT;
+	TTT.placePiece(0,0); //x
+	TTT.toggleTurn();
+	TTT.placePiece(1,0); //o
+	TTT.toggleTurn();
+	TTT.placePiece(0,1); //o
+	TTT.toggleTurn();
+	TTT.placePiece(1,1); //x
+	TTT.toggleTurn();
+	TTT.placePiece(0,2); //x
+	TTT.toggleTurn();
+	ASSERT_TRUE(TTT.getWinner()=='X');
+}
+
+//return O in tie
+TEST(TicTacToeBoardTest, tieTestBug)
+{
+	TicTacToeBoard TTT;
+	TTT.toggleTurn();
+	TTT.placePiece(0,0); //o
+	TTT.toggleTurn();
+	TTT.placePiece(1,0); //x
+	TTT.toggleTurn();
+	TTT.placePiece(0,1); //o
+	TTT.toggleTurn();
+	TTT.placePiece(1,1); //x
+	TTT.toggleTurn();
+	TTT.placePiece(0,2); //o
+	TTT.toggleTurn();
+	ASSERT_TRUE(TTT.getWinner()=='X');
+}
