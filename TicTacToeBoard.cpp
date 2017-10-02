@@ -17,6 +17,12 @@ TicTacToeBoard::TicTacToeBoard()
  * Switches turn member variable to represent whether it's X's or O's turn
  * and returns whose turn it is
 **/
+
+/* 
+BUG: If the game begins with O instead of X and there is a Tie, 
+it will return the incorrect last played piece where the correct
+output should be O, but instead returns as X.
+*/
 Piece TicTacToeBoard::toggleTurn()
 {
 	// if there is no value for turn of X or O, assume that its the first turn and it should be X
@@ -103,7 +109,7 @@ Piece TicTacToeBoard::getWinner()
 			for(int j=0;j<3;j++)
 			{
 				if(board[i][j] == Blank)
-				return Invalid;
+					return Invalid;
 			}
 		}
 	}

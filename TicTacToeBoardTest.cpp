@@ -23,11 +23,14 @@ TEST(TicTacToeBoardTest, verticalWinTest)
 	TTT.placePiece(1,2); //o
 	TTT.toggleTurn();
 	TTT.placePiece(0,0); //x
-
 	TTT.toggleTurn();
 	TTT.placePiece(1,1); //o
-	TTT.toggleTurn();
+	//TTT.toggleTurn();
+	ASSERT_TRUE(TTT.toggleTurn() == X);
 	TTT.placePiece(0,2); //x
+	
+	//toggle turn after win should still return x
+	ASSERT_TRUE(TTT.toggleTurn()==X);
 	
 	ASSERT_TRUE(TTT.getWinner()==X);
 
@@ -69,6 +72,7 @@ TEST(TicTacToeBoardTest, diag1AndOWinTest)
 	TTT.placePiece(1,0); //x
 	TTT.toggleTurn();
 	TTT.placePiece(2,0); //o
+	ASSERT_TRUE(TTT.toggleTurn() == O);
 	
 	ASSERT_TRUE(TTT.getWinner()==O);
 }
@@ -125,6 +129,7 @@ TEST(TicTacToeBoardTest, tieTestWorking)
 	TTT.placePiece(0,2); //x
 	TTT.toggleTurn();
 	ASSERT_TRUE(TTT.getWinner()=='X');
+	ASSERT_TRUE(TTT.toggleTurn()=='X');
 }
 
 //return O in tie
@@ -144,3 +149,5 @@ TEST(TicTacToeBoardTest, tieTestBug)
 	TTT.toggleTurn();
 	ASSERT_TRUE(TTT.getWinner()=='X');
 }
+
+
