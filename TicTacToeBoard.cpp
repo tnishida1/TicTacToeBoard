@@ -36,7 +36,7 @@ Piece TicTacToeBoard::toggleTurn()
 	}
 	else if(getWinner() == Blank) //and and an or
 	{
-		return X;
+		return turn;
 	}
 	else
 	{
