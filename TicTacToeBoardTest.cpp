@@ -147,7 +147,7 @@ TEST(TicTacToeBoardTest, tieTestBug)
 	TTT.toggleTurn();
 	TTT.placePiece(0,2); //o
 	TTT.toggleTurn();
-	ASSERT_TRUE(TTT.getWinner()=='X');
+	ASSERT_TRUE(TTT.getWinner()=='O');
 }
 
 
